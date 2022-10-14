@@ -8,6 +8,8 @@
 uint32_t row = 0 ;
 uint32_t col = 0 ;
 
+
+
 //returns the location of the graphical memory
 uint16_t *ptr_mem(uint32_t lig,uint32_t col){
     uint16_t *position = (uint16_t*)(0xB8000 + 2 * (lig * 80 + col));
@@ -95,6 +97,7 @@ void defilement(){
     place_curseur(row,col);
 
 }
+
 void console_putbytes(const char* s){
     while(*s!='\0'){
         traite_car(*s,15,0);
