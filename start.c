@@ -1,6 +1,7 @@
 #include <cpu.h>
 #include <inttypes.h>
-#include <ecran.h>
+#include "ecran.h"
+#include "temp.h"
 // #include<sys/wait.h>
 
 // on peut s'entrainer a utiliser GDB avec ce code de base
@@ -10,6 +11,8 @@
 
 void kernel_start(void)
 {
+    
+    initialisations();
     sti();
     while (1) {
         // cette fonction arrete le processeur
