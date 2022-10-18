@@ -10,11 +10,12 @@
 #define QUARTZ 0X1234DD
 #define CLOCKFREQ 50
 #define NUM_IRQ 0
+#define MASQUE 0 
 int     ticCounter = 0;
 float ss = 0;
 float mm = 0;
 float hh = 0;
-// char time[8];
+char time[8];
 extern void traitant_IT_32(void);
 
 
@@ -52,25 +53,25 @@ void show_time(char* string){
     hh++;
     mm=0;
    }
-   char time[8];
    sprintf(time,"%1.0f:%1.0f:%1.0f",hh,mm,ss);
    show_time(time);
  }
 
 //punto 3
 void init_traitant_IT(uint32_t num_IT, void (*traitant)(void)){
+
     uint32_t* table_de_vecteurs = (uint32_t*)0X1000;
-    table_de_vecteurs += num_IT;
+    table_de_vecteurs += num_IT*8;
     *table_de_vecteurs = ((uint32_t)KERNEL_CS)<<16| ((uint32_t) traitant<<16)>>16;
     table_de_vecteurs++;
-    *table_de_vecteurs = ((uint32_t)traitant>>16)<<16|(uint32_t)0X8E00;
-    
+    *table_de_vecteurs = ((uint32_t)traitant>>16)<<16|(uint32_t)0X8E00;   
 }
 
 void initialisations(void){
+    
     init_traitant_IT(INTERRUPTION_NUMBER, traitant_IT_32);
     fix_frequency();
-    masque_IRQ(NUM_IRQ,0);
+    masque_IRQ(NUM_IRQ,MASQUE);
 }
 
 // void test(){
@@ -86,7 +87,7 @@ void masque_IRQ(uint32_t num_IRQ, uint8_t masque ){
     }else{
         octect_recupere&=~mask;
     }
-    outb(octect_recupere,0x21);
+    outb(octect_recupere,0X21);
 }
 void fix_frequency(){
     outb(0X34,0X43);
