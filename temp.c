@@ -12,10 +12,10 @@
 #define NUM_IRQ 0
 #define MASQUE 0 
 int     ticCounter = 0;
-float ss = 0;
-float mm = 0;
-float hh = 0;
-char time[8];
+int ss = 0;
+int mm = 0;
+int hh = 0;
+// char time[9];
 extern void traitant_IT_32(void);
 //punto 1
 
@@ -39,6 +39,7 @@ void show_time(char* string){
    ticCounter++;
    if(ticCounter==CLOCKFREQ){
         ss++;
+        ticCounter=0;
    }
    if(ss==60){
         mm++;
@@ -53,7 +54,7 @@ void show_time(char* string){
     mm=0;
     ss=0;
    }
-   sprintf(time,"%1.0f:%1.0f:%1.0f",hh,mm,ss);
+   sprintf(time,"%02d:%02d:%02d",hh,mm,ss);
    show_time(time);
  }
 
@@ -69,7 +70,6 @@ void init_traitant_IT(uint32_t num_IT, void (*traitant)(void)){
 }
 
 void initialisations(void){
-    
     init_traitant_IT(INTERRUPTION_NUMBER, traitant_IT_32);
     fix_frequency();
     masque_IRQ(NUM_IRQ,MASQUE);

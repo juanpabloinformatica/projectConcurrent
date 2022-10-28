@@ -11,7 +11,7 @@
 
 void kernel_start(void)
 {
-    
+    efface_ecran();
     initialisations();
     sti();
     while (1) {
