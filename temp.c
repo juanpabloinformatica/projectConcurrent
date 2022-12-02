@@ -15,7 +15,7 @@ int     ticCounter = 0;
 int ss = 0;
 int mm = 0;
 int hh = 0;
-// char time[9];
+char time[9];
 extern void traitant_IT_32(void);
 //punto 1
 
@@ -48,11 +48,6 @@ void show_time(char* string){
    if(mm==60){
     hh++;
     mm=0;
-   }
-   if(hh==25){
-    hh=0;
-    mm=0;
-    ss=0;
    }
    sprintf(time,"%02d:%02d:%02d",hh,mm,ss);
    show_time(time);

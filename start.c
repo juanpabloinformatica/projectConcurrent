@@ -2,6 +2,9 @@
 #include <inttypes.h>
 #include "ecran.h"
 #include "temp.h"
+#include "gProcessus.h"
+#include <stdio.h>
+
 // #include<sys/wait.h>
 
 // on peut s'entrainer a utiliser GDB avec ce code de base
@@ -11,9 +14,13 @@
 
 void kernel_start(void)
 {
+    
+    initialisationStructures(&proc1);
     efface_ecran();
     initialisations();
-    sti();
+    idle();
+    
+    // sti();
     while (1) {
         // cette fonction arrete le processeur
         hlt();

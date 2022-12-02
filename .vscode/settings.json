@@ -1,8 +1,13 @@
 {
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/jppm/Documents/ENSIMAG_JUAN/s1/concurrent/projectConcurrent",
+            "binaryPath": "/home/jppm/Documents/ENSIMAG_JUAN/s1/concurrent/projectConcurrent/kernel.bin",
+            "binaryArgs": []
+        }
+    ],
     "files.associations": {
-        "inttypes.h": "c",
-        "stdio.h": "c",
-        "temp.h": "c",
-        "cstdio": "c"
+        "cpu.h": "c",
+        "tinyalloc.h": "c"
     }
 }

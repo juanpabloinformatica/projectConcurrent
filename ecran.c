@@ -61,7 +61,6 @@ void traite_car(char c,int color,int bck){
         }
         place_curseur(row,col);
     }else{
-
         if(c == 8){
             if(col!=0){
                 col-=1;
@@ -74,6 +73,7 @@ void traite_car(char c,int color,int bck){
             }
         }else if(c == 10){
             row+=1;
+            col=0;
             place_curseur(row,col);
         }else if(c == 12){
             efface_ecran();
@@ -84,8 +84,10 @@ void traite_car(char c,int color,int bck){
             col=0;
             place_curseur(row,col);
         }
-
-
+        if(row>24){
+            defilement();
+        }
+    
     }
 }
 
@@ -95,7 +97,6 @@ void defilement(){
     }
     row-=1;
     place_curseur(row,col);
-
 }
 
 void console_putbytes(const char* s){
