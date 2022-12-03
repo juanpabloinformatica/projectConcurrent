@@ -8,26 +8,35 @@
 #define TABLEAU_PROCESSUS_LENGTH 2
 void ctx_sw(int *, int *);
 Processus* ptrProcessusActif;
- 
 
 Processus* processus[TABLEAU_PROCESSUS_LENGTH];
+int processusIndice = 1; 
 
 Processus idleP = {.nomProcessus = "idle", .pid = 0, .etat = elu};
-Processus proc1P = {.nomProcessus = "proc1", .pid = 1, .etat = activable};
+// Processus proc1P = {.nomProcessus = "proc1", .pid = 1, .etat = activable};
 
 /*end -premiere etape*/
 
 
-void initialisationStructures(void (*proccesFunction)())
-{
-    processus[0] = &idleP;
-    processus[1] = &proc1P;
-    // // ptrProcessusActif = &processus[0];
-    processus[1]->contexteDExecution[1] = (int)&(processus[1]->pileDExecution[PILE_DEXECUTION_LENGTH - 1]);
-    processus[1]->pileDExecution[PILE_DEXECUTION_LENGTH-1] = (int)proccesFunction;
-    // processus[1].contexteDExecution[1] = (int)&(processus[1].pileDExecution[PILE_DEXECUTION_LENGTH - 1]);
-    // processus[1].pileDExecution[PILE_DEXECUTION_LENGTH - 1] = (int)proccesFunction;
+int cree_processus(void(*code)(void),char* nom){
+    
+    if(processusIndice == TABLEAU_PROCESSUS_LENGTH+1){
+        return -1;
+    }
+    // Processus p = {.pid = processusIndice, .etat=activable};
+    // strcpy(p.nomProcessus,nom);
+    Processus* ptr_processus = (Processus*)malloc(sizeof(Processus));
+    ptr_processus->pid = processusIndice;
+    ptr_processus->etat = activable;
+    strcpy(ptr_processus->nomProcessus,nom);
+    ptr_processus = ptr_processus;
+    processus[processusIndice] = ptr_processus;
+    processus[processusIndice]->contexteDExecution[1] = (int)&(processus[1]->pileDExecution[PILE_DEXECUTION_LENGTH - 1]);
+    processus[processusIndice]->pileDExecution[PILE_DEXECUTION_LENGTH - 1] = (int)code;
+    processusIndice++;
+    return 0;
 }
+
 // void idle(){
 
 //     printf("[idle] je tente de passer la main a proc1...\n");

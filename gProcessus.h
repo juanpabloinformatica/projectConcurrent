@@ -26,7 +26,7 @@ void proc5(void);
 void proc6(void);
 void proc7(void);
 
-void initialisationStructures(void(*processFunction)(void));
+int cree_processus(void(*code)(void),char* nom);
 void ordonnance(void);
 int mon_pid(void);
 char* mon_nom(void);

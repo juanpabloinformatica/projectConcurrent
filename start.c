@@ -4,7 +4,8 @@
 #include "temp.h"
 #include "gProcessus.h"
 #include <stdio.h>
-
+extern Processus* processus[];
+extern Processus idleP;
 // #include<sys/wait.h>
 
 // on peut s'entrainer a utiliser GDB avec ce code de base
@@ -15,7 +16,9 @@
 void kernel_start(void)
 {
     
-    initialisationStructures(&proc1);
+    // initialisationStructures(&proc1);
+    processus[0] = &idleP;
+    cree_processus(&proc1,"proc1");
     efface_ecran();
     initialisations();
     idle();
